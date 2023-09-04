@@ -6,6 +6,8 @@ import android.widget.TextView
 import java.text.SimpleDateFormat
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
+import android.view.WindowManager
+
 
 
 class MainActivity : Activity() {
@@ -17,6 +19,12 @@ class MainActivity : Activity() {
         setContentView(R.layout.activity_main)
         textViewTime = findViewById(R.id.time)
         executor.scheduleAtFixedRate(updateTimeRunnable, 0, 1, TimeUnit.SECONDS)
+
+        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+
+
+
+
     }
 
     private val updateTimeRunnable = Runnable {
@@ -41,5 +49,6 @@ class MainActivity : Activity() {
     override fun onDestroy() {
         super.onDestroy()
         executor.shutdown()
+
     }
 }
